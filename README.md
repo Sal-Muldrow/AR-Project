@@ -9,6 +9,6 @@ There's nothing here right now. Just a read me. Waiting on some more code before
 4. Investigate AR-kit
 5. Create code plan
 # Misc:
-1. Get more RAM for my Mac
+<s>1. Get more RAM for my Mac</s>
 
 
