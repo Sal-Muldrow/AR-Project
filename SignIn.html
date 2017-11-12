@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <h1>Sign In!</h1>
+    <form action="">
+      <input id="username" autocomplete="off" />
+      <input id="password" autocomplete="off" /><button>Send</button>
+    </form>
+    <a href="/SignUp.html">Sign Up</a>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> 
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/core.js"></script>
+    <script>
+		
+
+		
+		
+      $(function () {
+
+        var socket = io();
+        $('form').submit(function(){ //When sign up form is submitted
+
+				
+
+		      //Send the backend our username and password values
+          socket.emit("UserAuth", $('#username').val(),$('#password').val());
+
+		                    
+          return false; //don't reset the page
+		  
+        });
+        socket.on("UserNotFound", function(){
+
+          $('#messages').append($('<li>').text("User Not Found"));
+
+          window.scrollTo(0, document.body.scrollHeight);
+
+
+        });
+
+        socket.on("PasswordFail", function(){
+
+          $('#messages').append($('<li>').text("Password Not Found"));
+
+          window.scrollTo(0, document.body.scrollHeight);
+
+        });
+
+        socket.on("UserAuthSucc", function(msg){
+          document.cookie = $('#username').val();
+
+           
+          window.location.href = "/index.html";
+
+        });
+
+      });
+    </script>
+	<script>
+	
+	
+	</script>
+  </body>
+</html>

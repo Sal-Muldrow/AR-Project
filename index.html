@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <H1 id="Title"></H1>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="DataName" autocomplete="off" />
+      <button>Create New Data Set</button>
+    </form>
+    
+    <h3>Your Datasets:</h3>
+    <div id ="Datasets"></div>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> 
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/core.js"></script>
+    <script>
+		
+
+		
+		
+      $(function () {
+
+        var socket = io();
+        var MyUserName;
+        var MyUserName = document.cookie;
+        var MyData;
+        document.getElementById("Title").innerHTML = "Welcome Back: " + MyUserName;
+        socket.emit("GetUserData", MyUserName);
+        function GetDataSet(Dataset, i){
+            
+            console.log(MyData[i]);
+
+        } 
+
+
+
+        $('form').submit(function(){ //When sign up form is submitted
+
+				
+
+		      //Send the backend our username and password values
+          socket.emit("CreateNewDataSet", MyUserName, $('#DataName').val());
+          $('#DataName').val(''); //empty these values in the UI
+          
+		      
+          return false; //don't reset the page
+		  
+        });
+        socket.on("SendUserData", function(data){
+          
+          $('#messages').append($('<li>').text(JSON.stringify(data)));
+          for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            NewData = data[i].title;
+            MyData = data;
+
+            var btn = document.createElement("BUTTON");
+            btn.innerHTML = data[i].title;
+            
+            btn.onclick = (function(NewData, i){
+                 return function(){
+                     GetDataSet(NewData, i);
+                 }
+            })(NewData, i);
+        
+            document.getElementById("Datasets").appendChild(btn);
+
+            
+        }
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      });
+    </script>
+	<script>
+	
+	
+	</script>
+  </body>
+</html>
