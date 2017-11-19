@@ -3,19 +3,26 @@
   <head>
     <title>Socket.IO chat</title>
     <style>
-      
+      textarea {
+        resize: none;
+
+      }
     </style>
   </head>
   <body>
     <H1 id="Title"></H1>
     <ul id="messages"></ul>
-    <form action="">
+    <form action="" id="datasetform">
       <input id="DataName" autocomplete="off" />
       <button>Create New Data Set</button>
     </form>
     
     <h3>Your Datasets:</h3>
     <div id ="Datasets"></div>
+    <textarea rows="4" cols="50">
+    
+    </textarea>
+
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> 
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/core.js"></script>
@@ -40,7 +47,7 @@
 
 
 
-        $('form').submit(function(){ //When sign up form is submitted
+        $('#datasetform').submit(function(){ //When sign up form is submitted
 
 				
 
@@ -49,7 +56,7 @@
           $('#DataName').val(''); //empty these values in the UI
           
 		      
-          return false; //don't reset the page
+          
 		  
         });
         socket.on("SendUserData", function(data){

@@ -65,11 +65,11 @@ io.on('connection', function(socket){
           var Obj = {title : DataName} // Create an object with the Data Set's Name
           var intitArray = db.get('posts').find({ UserName: username }).value().data; //keep the old array of data
           intitArray.push(Obj); // Add the new dataset to the inital array of datasets
-          db.get('posts');
+          db.get('posts')
           .find({UserName: username})
-          .get('data');
+          .get('data')
           .assign({ data: intitArray}) //rewrite the data array with everything included, old and new
-          .write()
+          .write();
         
     
     
