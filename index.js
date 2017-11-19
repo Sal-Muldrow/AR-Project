@@ -62,7 +62,7 @@ io.on('connection', function(socket){
   });
   socket.on("CreateNewDataSet", function(username, DataName){ //When the user wants to create a new dataset
 
-          var Obj = {title : DataName} // Create an object with the Data Set's Name
+          var Obj = {title : DataName, Ndata: []} // Create an object with the Data Set's Name
           var intitArray = db.get('posts').find({ UserName: username }).value().data; //keep the old array of data
           intitArray.push(Obj); // Add the new dataset to the inital array of datasets
           db.get('posts')
@@ -70,6 +70,24 @@ io.on('connection', function(socket){
           .get('data')
           .assign({ data: intitArray}) //rewrite the data array with everything included, old and new
           .write();
+        
+    
+    
+  });
+    socket.on("AddNewData", function(username, AreaData, CurDS){ 
+          console.log("adding new data"+CurDS + AreaData);
+          //When the user wants to create a new dataset
+          //if(db.get('posts').find({ UserName: username }).get('data').find({title: CurDS}).get('Ndata') == null){
+            db.get('posts')
+            .find({UserName: username})
+            .get('data')
+            .find({title: CurDS})
+            .get("Ndata")
+            .push( AreaData ) //rewrite the data array with everything included, old and new
+            .write();
+          //}
+
+
         
     
     

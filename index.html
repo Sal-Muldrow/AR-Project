@@ -16,12 +16,15 @@
       <input id="DataName" autocomplete="off" />
       <button>Create New Data Set</button>
     </form>
-    
     <h3>Your Datasets:</h3>
     <div id ="Datasets"></div>
-    <textarea rows="4" cols="50">
+    <form action="" id="dataform">
+      <textarea rows="4" cols="50" id="areadata">
     
-    </textarea>
+      </textarea>
+      
+      <button>Add data</button>
+    </form>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script> 
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -35,6 +38,7 @@
 
         var socket = io();
         var MyUserName;
+        var CurDS;
         var MyUserName = document.cookie;
         var MyData;
         document.getElementById("Title").innerHTML = "Welcome Back: " + MyUserName;
@@ -42,22 +46,35 @@
         function GetDataSet(Dataset, i){
             
             console.log(MyData[i]);
+            CurDS = MyData[i].title;
 
         } 
 
 
 
-        $('#datasetform').submit(function(){ //When sign up form is submitted
+        $('#datasetform').submit(function(){ //When create data set form is submitted
 
 				
 
-		      //Send the backend our username and password values
+		      //Send the backend our dataset name
           socket.emit("CreateNewDataSet", MyUserName, $('#DataName').val());
           $('#DataName').val(''); //empty these values in the UI
           
 		      
           
 		  
+        });
+        $('#dataform').submit(function(){ //When data form is submitted
+
+        
+
+          
+          socket.emit("AddNewData", MyUserName, $('#areadata').val(), CurDS);
+          $('#areadata').val(''); //empty these values in the UI
+          
+          
+          
+      
         });
         socket.on("SendUserData", function(data){
           
