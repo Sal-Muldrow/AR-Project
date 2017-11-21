@@ -1,3 +1,26 @@
+/*
+TODO:
+Get Userdata REQ
+Turn User data into Array
+Send Userdata to Client
+Represent Data in a table
+Allow for the User to select parts of the table
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -21,6 +44,7 @@ app.get('/index.html', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 /*
+hi!
 var DDATA = {data1: '1',data2:'2'};
 
 db.get('posts')
