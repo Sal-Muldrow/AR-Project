@@ -5,7 +5,6 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
-      <link rel="stylesheet" media="screen" href="/handsontable/dist/handsontable.full.css">
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,20 +13,20 @@
     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/core.js"></script>
     <script src="/handsontable/dist/handsontable.full.js"></script>
-    
+    <link rel="stylesheet" media="screen" href="/handsontable/dist/handsontable.full.css">
     <title>Socket.IO chat</title>
     <style>
       textarea {
         resize: none;
 
       }
-
+      #container.handsontable table{
+        width:100%;
+      }
       .nav-wrapper {
         background-color: #1e88e5 !important;
         color: white;
       }
-
-
     </style>
   </head>
   <body>
@@ -48,7 +47,7 @@
 
         <div id="menu">
         <li><div class="divider"></div></li>
-        <li><a class="waves-effect waves-light  modal-trigger" href="#modal2">Create A New Dataset<i class="material-icons">add</i></a></li>
+        <!---<li><a href="" class="waves-effect waves-light  modal-trigger" href="#modal1">Create A New Dataset<i class="material-icons">add</i></a></li> -->
         <li><div class="divider"> </div></li>
         </div>
       </ul>
@@ -66,7 +65,7 @@
         </span>
       </nav>
 
-    <div id="example" style="position: absolute;"></div>
+    <div id="example" ></div>
     <!-- Modal Trigger -->
     
 
@@ -83,7 +82,7 @@
         
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green  ">Back</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green  ">Agree</a>
       </div>
     </div>
     <div id="modal2" class="modal">
@@ -95,14 +94,14 @@
         
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green  ">Back</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green  ">Agree</a>
       </div>
     </div>
 
     <H1 id="Title"></H1>
     <ul id="messages"></ul>
 
-    
+    <h3>Your Datasets:</h3>
     
 
     
@@ -110,48 +109,10 @@
 
 
     <script>
-        var container = document.getElementById('example');
-        var hot = new Handsontable(container, {
-          data: [[]],
-          
-          rowHeaders: true,
-          colHeaders: true,
-          minRows: 100,
-          minCols: 100,
-          minSpareCols: 100,
-          minSpareRows: 100,
-          contextMenu: true,
-          contextMenu: {
-            items: {
-              "Create A Chart": {
-                name: 'Create A Chart',
-                callback: function(key, options) {
-                  var selection = this.getSelectedRange();
-                  var fromRow = Math.min(selection.from.row, selection.to.row);
-                  var toRow = Math.max(selection.from.row, selection.to.row);
-                  var fromCol = Math.min(selection.from.col, selection.to.col);
-                  var toCol = Math.max(selection.from.col, selection.to.col);
-                  console.log(this.getData(fromRow, fromCol, toRow, toCol));
-                  
-                  for (var row = fromRow; row <= toRow; row++) {
-                    for (var col = fromCol; col <= toCol; col++) {
-                     //cycle through all the cells
-                      
-                        
-                    }
-                  }
-                  
-                  this.render();
-                }
-              }
-            }
-          }
-
-        });
       $(document).ready(function(){
           // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
           $('.modal').modal();
-          $('#modal2').modal();
+          $('.modal2').modal();
         });
        
     
@@ -173,12 +134,6 @@
         var MyUserName;
         var CurDS;
         var MyUserName = document.cookie;
-        if(localStorage.getItem("CurDS") != null){
-          socket.emit("GetDataSet", MyUserName, localStorage.getItem("CurDS"));
-          CurDS = localStorage.getItem("CurDS");
-          
-
-        }
         var MyData;
 
         
@@ -187,7 +142,6 @@
             
             console.log(MyData[i]);
             CurDS = MyData[i].title;
-            localStorage.setItem("CurDS", CurDS);
             socket.emit("GetDataSet", MyUserName, CurDS);
 
         } 
@@ -208,7 +162,6 @@
       
         });
         $('#dataform').submit(function(){ //When data form is submitted
-
 
         
 
@@ -242,7 +195,6 @@
         }
         DataArray = b;
         console.log(DataArray);
-
         var data = [
           ["1", "Ford", "Volvo", "Toyota", "Honda", "wow", "10"],
           [1,1, 10, 11, 12, 13,14],
@@ -256,10 +208,6 @@
           
           rowHeaders: true,
           colHeaders: true,
-          minRows: 100,
-          minCols: 100,
-          minSpareCols: 100,
-          minSpareRows: 100,
           contextMenu: true,
           contextMenu: {
             items: {
@@ -272,7 +220,7 @@
                   var fromCol = Math.min(selection.from.col, selection.to.col);
                   var toCol = Math.max(selection.from.col, selection.to.col);
                   console.log(this.getData(fromRow, fromCol, toRow, toCol));
-                  
+                  document.getElementById("Title").innerHTML = "selcted data is: " + this.getData(fromRow, fromCol, toRow, toCol);
                   for (var row = fromRow; row <= toRow; row++) {
                     for (var col = fromCol; col <= toCol; col++) {
                      //cycle through all the cells
@@ -293,7 +241,7 @@
 
             
         
-          
+          window.scrollTo(0, document.body.scrollHeight);
         });
         socket.on("SendUserData", function(data){
           
@@ -316,7 +264,7 @@
 
             
         }
-          
+          window.scrollTo(0, document.body.scrollHeight);
         });
       });
     </script>

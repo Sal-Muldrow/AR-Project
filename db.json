@@ -55,24 +55,9 @@
       "Password": "chigga",
       "data": [
         {
-          "title": "1"
-        },
-        {
-          "title": "2"
-        },
-        {
-          "title": "wow"
-        },
-        {
-          "title": "3"
-        },
-        {
-          "title": "5"
-        },
-        {
           "title": "hi",
           "Ndata": [
-            "    \n      trials,heads,tails,% heads\n100,45,55,45\n60,40,20,66.66666667\n50,28,22,56\n50,34,39,68\n68,39,29,57.35294118"
+            " trials,heads,tails,% heads, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,\n100,45,55,45\n60,40,20,66.66666667\n50,28,22,56\n50,34,39,68\n68,39,29,57.35294118\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
           ]
         },
         {
@@ -82,17 +67,18 @@
           "title": "this,that,the ,other,thing 1,2,3,4,5 1,2,3,4,5"
         },
         {
-          "8": "what up"
+          "title": "wow jared",
+          "Ndata": [
+            "trials,heads,tails,% heads\n100,45,55,45\n60,40,20,66.66666667\n50,28,22,56\n50,34,39,68\n68,39,29,57.35294118"
+          ]
         },
         {
-          "title": "wow jared"
-        },
-        {
-          "title": "hu"
-        },
-        {
-          "title": "hi",
-          "Ndata": []
+          "title": "wowadataset",
+          "Ndata": [
+            "1,2,3,4,5\n        ",
+            "8,12,16,20\n        ",
+            "\"wow\", \"a meme\","
+          ]
         }
       ]
     },

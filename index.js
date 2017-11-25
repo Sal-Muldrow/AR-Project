@@ -22,6 +22,7 @@ Allow for the User to select parts of the table
 
 
 var app = require('express')();
+var express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
@@ -43,6 +44,9 @@ app.get('/SignUp.html', function(req, res){
 app.get('/index.html', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
+app.use('/handsontable', express.static('C:/Users/Sam/Desktop/AR-Project/node_modules/handsontable/'));
+app.use('/materialize', express.static('C:/Users/Sam/Desktop/AR-Project/materialize'))
+
 /*
 hi!
 var DDATA = {data1: '1',data2:'2'};
@@ -77,9 +81,18 @@ io.on('connection', function(socket){
     
     
   });
+  
   socket.on("GetUserData", function(username){ // when the user asks for their data
 
       io.emit('SendUserData', db.get('posts').find({ UserName: username }).value().data); // grab a users data at username
+
+    
+    
+  });
+  socket.on("GetDataSet", function(username, CurDS){ // when the user asks for their data within Ndata
+
+      io.emit('SendDataSet', db.get('posts').find({UserName: username}).get('data').find({title: CurDS}).get("Ndata").value());
+                   // grab a users data at username from Ndata
 
     
     
