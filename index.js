@@ -44,8 +44,9 @@ app.get('/SignUp.html', function(req, res){
 app.get('/index.html', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
-app.use('/handsontable', express.static('C:/Users/Sam/Desktop/AR-Project/node_modules/handsontable/'));
-app.use('/materialize', express.static('C:/Users/Sam/Desktop/AR-Project/materialize'))
+app.use('/handsontable', express.static('/Users/sal-muldrow/Desktop/AR-Project/node_modules/handsontable'));
+app.use('/materialize', express.static('/Users/sal-muldrow/Desktop/AR-Project/materialize'))
+
 
 /*
 hi!
