@@ -1,23 +1,21 @@
 # AR-Project
 Turning the 2D into the 3D 😎
-# Welcome!
-There's nothing here right now. Just a read me. Waiting on some more code before I commit it here!
 # TODO!
-1. Write up plan of build 
-2. Wire frame the build 
-3. Make a list of tech we need to use
-4. Investigate AR-kit
-5. Create code plan
-6. Create Database
-7. Create database
-8. User Sign Up
-9. Back end connections
-10. Allow storage of user data
-11. Refactor/comment/document code < *Current Task*
-12. Allow user to refine data
-13. Store refined data in a seperate db
-14. Access Refinded DB in app
-15. Allow for annotations/extra etc
+1. <s>Write up plan of build </s>
+2. <s>Wire frame the build </s>
+3. <s>Make a list of tech we need to use</s>
+4. <s>Investigate AR-kit</s>
+5. <s>Create code plan</s>
+6. <s>Create Database</s>
+7. <s>Create database</s>
+8. <s>User Sign Up</s>
+9. <s>Back end connections</s>
+10. <s>Allow storage of user data</s>
+11. <s>Refactor/comment/document code </s>
+12. <s>Allow user to refine data</s>
+13. <s>Store refined data in a seperate db</s>
+14. <s>Access Refinded DB in app</s>
+15. <s>Allow for annotations/extra etc</s>
 # Misc:
 <s>1. Get more RAM for my Mac</s>
 
